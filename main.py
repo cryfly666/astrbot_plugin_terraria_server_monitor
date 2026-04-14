@@ -144,7 +144,7 @@ class MyPlugin(Star):
         max_players = server_data["max"]
         players = server_data["players"]
 
-        message = f"🌿 服务器: {server_data['name']}\n"
+        message = f"🟢 服务器: {server_data['name']}\n"
         message += f"👥 在线玩家: {online}/{max_players}"
 
         if players:
