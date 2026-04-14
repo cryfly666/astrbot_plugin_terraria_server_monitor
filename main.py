@@ -190,13 +190,13 @@ class MyPlugin(Star):
         if player_diff > 0:
             new_players = set(current_players) - set(self.last_player_list)
             if new_players:
-                changes.append(f"📈 {', '.join(new_players)} 加入了服务器 (+{player_diff})")
+                changes.append(f"📈 {', '.join(new_players)} 加入了服务器")
             else:
                 changes.append(f"📈 有 {player_diff} 名玩家加入了服务器")
         elif player_diff < 0:
             left_players = set(self.last_player_list) - set(current_players)
             if left_players:
-                changes.append(f"📉 {', '.join(left_players)} 离开了服务器 ({player_diff})")
+                changes.append(f"📉 {', '.join(left_players)} 离开了服务器")
             else:
                 changes.append(f"📉 有 {abs(player_diff)} 名玩家离开了服务器")
 
@@ -253,7 +253,9 @@ class MyPlugin(Star):
 
                 if should_send:
                     full_status = self._format_server_info(server_data)
-                    final_message = f"🔔 服务器状态变化：\n{change_message}\n\n📊 当前状态：\n{full_status}"
+                    hitokoto = await self._fetch_hitokoto()
+                    hitokoto_line = f"\n💬 {hitokoto}" if hitokoto else ""
+                    final_message = f"🔔 服务器状态变化：\n{change_message}\n\n📊 当前状态：\n{full_status}{hitokoto_line}"
                     await self.notify_subscribers(final_message)
                 else:
                     logger.info(f"🔍 服务器状态无变化: 玩家数 {server_data['online']}/{server_data['max']}")
