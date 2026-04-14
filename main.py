@@ -124,7 +124,7 @@ class MyPlugin(Star):
 
         return {
             "status": "online",
-            "name": status_data.get("name", self.server_name),
+            "name": self.server_name or status_data.get("name", "泰拉瑞亚服务器"),
             "version": status_data.get("serverversion", "未知"),
             "tshock_version": status_data.get("tshockversion", "未知"),
             "online": status_data.get("playercount", len(player_names)),
