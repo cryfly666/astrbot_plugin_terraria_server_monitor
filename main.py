@@ -255,7 +255,7 @@ class MyPlugin(Star):
                     full_status = self._format_server_info(server_data)
                     hitokoto = await self._fetch_hitokoto()
                     hitokoto_line = f"\n\n💬 {hitokoto}" if hitokoto else ""
-                    final_message = f"🔔 服务器状态变化：\n{change_message}\n\n📊 当前状态：\n{full_status}{hitokoto_line}"
+                    final_message = f"🔔 服务器状态变化：\n{change_message}\n\n{full_status}{hitokoto_line}"
                     await self.notify_subscribers(final_message)
                 else:
                     logger.info(f"🔍 服务器状态无变化: 玩家数 {server_data['online']}/{server_data['max']}")
