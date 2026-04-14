@@ -8,7 +8,7 @@
   "server_name": {
     "description": "服务器名称",
     "type": "string",
-    "hint": "服务器的显示名称（用于消息中显示，会被TShock返回的名称覆盖）",
+    "hint": "服务器的显示名称（用于消息中显示，优先使用此配置，未填写时才使用TShock返回的名称）",
     "default": "泰拉瑞亚服务器"
   },
   "tshock_host": {
