@@ -143,13 +143,8 @@ class MyPlugin(Star):
         online = server_data["online"]
         max_players = server_data["max"]
         players = server_data["players"]
-        world = server_data.get("world", "未知")
-        version = server_data.get("version", "未知")
-        update_time = server_data.get("update_time", "未知")
 
         message = f"🌿 服务器: {server_data['name']}\n"
-        message += f"🗺️ 地图: {world}\n"
-        message += f"🎮 版本: {version}\n"
         message += f"👥 在线玩家: {online}/{max_players}"
 
         if players:
@@ -160,7 +155,6 @@ class MyPlugin(Star):
         else:
             message += "\n📋 当前无玩家在线"
 
-        message += f"\n🕒 更新时间: {update_time}"
         return message
 
     def _check_server_changes(self, server_data):
@@ -294,11 +288,27 @@ class MyPlugin(Star):
         else:
             yield event.plain_result("❌ 监控任务未在运行")
 
+    async def _fetch_hitokoto(self):
+        """从一言 API 获取随机句子"""
+        try:
+            async with aiohttp.ClientSession() as session:
+                async with session.get("https://v1.hitokoto.cn/", timeout=aiohttp.ClientTimeout(total=5)) as resp:
+                    if resp.status == 200:
+                        data = await resp.json(content_type=None)
+                        return data.get("hitokoto", "")
+        except Exception as e:
+            logger.warning(f"获取一言失败: {e}")
+        return ""
+
     @filter.command("查询")
     async def get_server_status(self, event: AstrMessageEvent):
         """立即查询服务器当前状态"""
         server_data = await self._fetch_server_data()
-        yield event.plain_result(self._format_server_info(server_data))
+        message = self._format_server_info(server_data)
+        hitokoto = await self._fetch_hitokoto()
+        if hitokoto:
+            message += f"\n💬 {hitokoto}"
+        yield event.plain_result(message)
 
     @filter.command("重置监控")
     async def reset_monitor(self, event: AstrMessageEvent):
