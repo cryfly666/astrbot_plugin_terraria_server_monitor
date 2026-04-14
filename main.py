@@ -254,7 +254,7 @@ class MyPlugin(Star):
                 if should_send:
                     full_status = self._format_server_info(server_data)
                     hitokoto = await self._fetch_hitokoto()
-                    hitokoto_line = f"\n💬 {hitokoto}" if hitokoto else ""
+                    hitokoto_line = f"\n\n💬 {hitokoto}" if hitokoto else ""
                     final_message = f"🔔 服务器状态变化：\n{change_message}\n\n📊 当前状态：\n{full_status}{hitokoto_line}"
                     await self.notify_subscribers(final_message)
                 else:
@@ -309,7 +309,7 @@ class MyPlugin(Star):
         message = self._format_server_info(server_data)
         hitokoto = await self._fetch_hitokoto()
         if hitokoto:
-            message += f"\n💬 {hitokoto}"
+            message += f"\n\n💬 {hitokoto}"
         yield event.plain_result(message)
 
     @filter.command("重置监控")
