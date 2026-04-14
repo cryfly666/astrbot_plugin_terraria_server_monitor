@@ -8,32 +8,32 @@
   "server_name": {
     "description": "服务器名称",
     "type": "string",
-    "hint": "服务器的显示名称（用于消息中显示）",
-    "default": "我的Minecraft服务器"
+    "hint": "服务器的显示名称（用于消息中显示，会被TShock返回的名称覆盖）",
+    "default": "泰拉瑞亚服务器"
   },
-  "server_ip": {
-    "description": "Minecraft服务器IP地址",
-    "type": "string", 
-    "hint": "要监控的Minecraft服务器IP地址或域名",
-    "default": "play.cn"
-  },
-  "server_port": {
-    "description": "Minecraft服务器端口",
-    "type": "int",
-    "hint": "要监控的Minecraft服务器端口号",
-    "default": 123456
-  },
-  "server_type": {
-    "description": "服务器类型",
+  "tshock_host": {
+    "description": "TShock服务器地址",
     "type": "string",
-    "hint": "服务器类型：java 或 bedrock",
-    "default": "bedrock"
+    "hint": "运行TShock的服务器IP地址或域名",
+    "default": "127.0.0.1"
+  },
+  "tshock_port": {
+    "description": "TShock REST API端口",
+    "type": "int",
+    "hint": "TShock REST API监听端口，默认为7878",
+    "default": 7878
+  },
+  "tshock_token": {
+    "description": "TShock REST API Token",
+    "type": "string",
+    "hint": "TShock REST API的认证Token，在TShock配置文件中设置",
+    "default": ""
   },
   "check_interval": {
     "description": "检查间隔（秒）",
     "type": "int",
-    "hint": "每隔多少秒检查一次服务器状态",
-    "default": 10
+    "hint": "每隔多少秒检查一次服务器状态，建议30~60秒",
+    "default": 30
   },
   "enable_auto_monitor": {
     "description": "自动启动监控",
