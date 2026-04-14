@@ -18,7 +18,7 @@
 ## 前置要求
 
 泰拉瑞亚服务器需要安装 [TShock](https://github.com/Pryaxis/TShock) 并启用 REST API。  
-REST API 默认端口为 **7878**，Token 在 TShock 配置文件（`tshock/config.json`）中的 `ApplicationRestTokens` 字段设置，或通过游戏内命令 `/rest token create <名称>` 创建。
+REST API 默认端口为 **7878**，Token 在 TShock 配置文件（`tshock/config.json`）中的 `ApplicationRestTokens` 字段设置。
 
 ---
 
